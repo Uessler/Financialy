@@ -1,0 +1,24 @@
+services:
+  db:
+    image: postgres:17-alpine
+    environment:
+      POSTGRES_USER: financialy
+      POSTGRES_PASSWORD: financialy
+      POSTGRES_DB: financialy
+    volumes: [financialy_data:/var/lib/postgresql/data]
+    healthcheck: {test: ["CMD-SHELL", "pg_isready -U financialy"], interval: 5s, timeout: 5s, retries: 10}
+  api:
+    build: ./backend
+    environment:
+      DATABASE_URL: postgres://financialy:financialy@db:5432/financialy
+      GOOGLE_CLIENT_ID: ${GOOGLE_CLIENT_ID}
+      JWT_SECRET: ${JWT_SECRET}
+      FRONTEND_URL: http://localhost:8080
+      COOKIE_SECURE: "false"
+    depends_on: {db: {condition: service_healthy}}
+    ports: ["3000:3000"]
+  web:
+    build: {context: ./frontend, args: {VITE_GOOGLE_CLIENT_ID: "${GOOGLE_CLIENT_ID}"}}
+    depends_on: [api]
+    ports: ["8080:80"]
+volumes: {financialy_data: {}}
