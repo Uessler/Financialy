@@ -4,3 +4,6 @@ export interface Category{id:string;name:string;color:string;kind:Kind;created_a
 export interface Transaction{id:string;category_id?:string;category_name?:string;kind:Kind;description:string;amount_cents:number;transaction_date:string;notes?:string;created_at:string}
 export interface Dashboard{income_cents:number;expense_cents:number;balance_cents:number;monthly:{month:string;income_cents:number;expense_cents:number}[];by_category:{category:string;color:string;total_cents:number}[]}
 export interface TransactionInput{category_id?:string|null;kind:Kind;description:string;amount_cents:number;transaction_date:string;notes?:string|null}
+export interface ReportCategory{category:string;color:string;kind:Kind;total_cents:number}
+export interface DetailedReport{start:string;end:string;income_cents:number;expense_cents:number;balance_cents:number;transaction_count:number;average_cents:number;by_category:ReportCategory[];transactions:Transaction[]}
+export interface ReportFilters{start:string;end:string;kind?:Kind;category_id?:string}

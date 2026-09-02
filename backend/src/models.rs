@@ -71,3 +71,24 @@ pub struct Dashboard {
     pub monthly: Vec<MonthlyPoint>,
     pub by_category: Vec<CategoryPoint>,
 }
+
+#[derive(Debug, Serialize, FromRow)]
+pub struct ReportCategoryPoint {
+    pub category: String,
+    pub color: String,
+    pub kind: String,
+    pub total_cents: i64,
+}
+
+#[derive(Debug, Serialize)]
+pub struct DetailedReport {
+    pub start: NaiveDate,
+    pub end: NaiveDate,
+    pub income_cents: i64,
+    pub expense_cents: i64,
+    pub balance_cents: i64,
+    pub transaction_count: i64,
+    pub average_cents: i64,
+    pub by_category: Vec<ReportCategoryPoint>,
+    pub transactions: Vec<Transaction>,
+}

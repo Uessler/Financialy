@@ -62,7 +62,8 @@ async fn main() -> anyhow::Result<()> {
             "/transactions/{id}",
             put(transactions::update).delete(transactions::delete),
         )
-        .route("/dashboard", get(reports::dashboard));
+        .route("/dashboard", get(reports::dashboard))
+        .route("/reports/detailed", get(reports::detailed));
     let app = Router::new()
         .nest("/api", api)
         .layer(TraceLayer::new_for_http())

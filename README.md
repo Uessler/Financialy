@@ -9,6 +9,7 @@ MVP de organização financeira com React, Rust, PostgreSQL e autenticação exc
 - Isolamento dos dados por usuário e categorias iniciais no primeiro login.
 - CRUD completo de categorias e movimentações na API.
 - Dashboard responsivo com totais e gráficos.
+- Relatório detalhado em tabela com filtros, ordenação, pesquisa, criação, edição, exclusão e exportação CSV.
 - Valores monetários armazenados em centavos e migrations PostgreSQL.
 - Imagens Docker para frontend e API.
 
